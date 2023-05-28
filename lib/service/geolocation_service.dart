@@ -1,12 +1,13 @@
+import 'dart:developer';
+
 import 'package:geolocator/geolocator.dart';
-// Interface abstract
+
 abstract class GeolocationServiceInterface {
   // ignore: unused_element
   Future<bool> _enableGeolocation();
   // ignore: unused_element
   Future<void> _requestPermissions();
   bool isPermissionEnabled();
-  // Latitude e longitude   
   Future<Position> getPosition();
   Future<bool> start();
 }
@@ -18,6 +19,7 @@ class GeolocationService implements GeolocationServiceInterface {
   @override
   Future<bool> _enableGeolocation() async {
     _serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    log("TESTE _enableGeolocation: ${_serviceEnabled}");
     if (!_serviceEnabled) {
       return Future.error("Location services are disabled");
     }

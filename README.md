@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # abc_tech_app
 
 ## Links úteis
@@ -20,6 +19,3 @@ Solução do windows
 ````
 start ms-settings:developers
 ````
-=======
-# Flutter - Fiap
->>>>>>> ad381441ce50e9769af451f1304197f44d0a5736
