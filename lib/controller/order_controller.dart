@@ -1,4 +1,5 @@
 import 'package:abc_tech_app/model/assist.dart';
+import 'package:abc_tech_app/model/response_api.dart';
 import 'package:abc_tech_app/model/order.dart';
 import 'package:abc_tech_app/model/order_location.dart';
 import 'package:abc_tech_app/service/geolocation_service.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'dart:developer';
+import 'dart:convert';
 
 enum OrderState { creating, started, finished }
 
@@ -86,21 +88,26 @@ class OrderController extends GetxController with StateMixin<bool> {
   void _createOrder() {
     change(true, status: RxStatus.loading());
     log("TESTE then: ${_order}");
-    _orderService.createOrder(_order!).then((value) {
-      if (value) {
+    _orderService.createOrder(_order!).then((response) {
+      if (response.status == 200) {
         Get.snackbar("Sucesso", "Ordem criada com sucesso!",
             backgroundColor: Colors.green);
+        clearForm();
       } else {
-        log("TESTE then: ${value}");
-        Get.snackbar("Erro", "Problema ao criar ordem",
-            backgroundColor: Colors.red);
+        final jsonString =
+          json.decode(response.bodyString.toString()) as Map<String, dynamic>;
+        final message = jsonString['description'] as String?;
+
+        Get.snackbar("Aviso", message.toString(),
+            backgroundColor: Colors.yellow);
+
+        screenState.value =  OrderState.started;
+        change(true, status: RxStatus.success());
       }
-      clearForm();
     }).onError((error, stackTrace) {
       log("TESTE onError: ${error}");
       Get.snackbar("Erro", "Problema ao criar ordem",
           backgroundColor: Colors.red);
-      clearForm();
     });
   }
 

@@ -2,10 +2,10 @@ import 'package:abc_tech_app/model/order.dart';
 import 'package:abc_tech_app/provider/order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:developer';
+
 
 abstract class OrderServiceInterface {
-  Future<bool> createOrder(Order order);
+  Future<Response> createOrder(Order order);
 }
 
 class OrderService extends GetxService implements OrderServiceInterface {
@@ -13,14 +13,10 @@ class OrderService extends GetxService implements OrderServiceInterface {
   OrderService(this._orderProvider);
 
   @override
-  Future<bool> createOrder(Order order) async {
+  Future<Response> createOrder(Order order) async {
     try {
       Response response = await _orderProvider.postOrder(order);
-      // validando por status code
-      if (response.status != 200) {
-        return Future.error(ErrorDescription("Erro na conexão"));
-      }
-      return Future.sync(() => true);
+      return Future.sync(() => response);
     } catch (e) {
       e.printInfo();
       return Future.error(ErrorDescription("Erro não esperado"));
