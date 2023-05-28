@@ -9,6 +9,7 @@ class OrderPage extends GetView<OrderController> {
 
   Widget renderAssists(List<Assist> assistList) {
     return ListView.builder(
+        physics: ScrollPhysics(), // add scroll para os novos serviços disponiveis
         shrinkWrap: true,
         itemCount: assistList.length,
         itemBuilder: (context, index) =>

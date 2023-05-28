@@ -15,16 +15,14 @@ class OrderService extends GetxService implements OrderServiceInterface {
   @override
   Future<bool> createOrder(Order order) async {
     try {
-      log("TESTE createOrder: ${order.toString()}");
       Response response = await _orderProvider.postOrder(order);
-      log("TESTE createOrder response: ${response.toString()}");
-      if (response.hasError) {
+      // validando por status code
+      if (response.status != 200) {
         return Future.error(ErrorDescription("Erro na conexão"));
       }
       return Future.sync(() => true);
     } catch (e) {
       e.printInfo();
-      log("TESTE createOrder catch: ${e.toString()}");
       return Future.error(ErrorDescription("Erro não esperado"));
     }
   }
