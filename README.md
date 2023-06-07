@@ -4,8 +4,6 @@
 
 [Libs do flutter](https://pub.dev/)
 
-
-
 #### Possíveis erros
 Problema
 ````
