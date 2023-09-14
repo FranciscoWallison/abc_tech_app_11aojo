@@ -1,7 +1,6 @@
 # abc_tech_app
 
 ![image](https://github.com/FranciscoWallison/abc_tech_app_11aojo/assets/19413241/250b79ab-d1db-41dd-9370-d2c5d42e64f4)
-
 ![image](https://github.com/FranciscoWallison/abc_tech_app_11aojo/assets/19413241/274637ae-8f10-4f51-aa68-4bdd90631c54)
 
 ## Links úteis
